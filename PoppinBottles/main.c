@@ -13,6 +13,9 @@ struct Customer {
     int bottles;
     int caps;
     int lifetimeBottles;
+    int fromDollars;
+    int fromBottles;
+    int fromCaps;
 };
 
 typedef struct Customer Customer;
@@ -21,6 +24,7 @@ Customer customerWithMoney(int dollars);
 Customer redeemDollars(Customer customer);
 Customer redeemBottles(Customer customer);
 Customer redeemCaps(Customer customer);
+Customer redeemAll(Customer customer);
 
 int main(int argc, const char * argv[]) {
     
@@ -33,6 +37,9 @@ int main(int argc, const char * argv[]) {
     bob = redeemCaps(bob);
     printf("Bob has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", bob.dollars, bob.bottles, bob.caps, bob.lifetimeBottles);
     
+    Customer phil = customerWithMoney(20);
+    phil = redeemAll(phil);
+    printf("Phil has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", phil.dollars, phil.bottles, phil.caps, phil.lifetimeBottles);
     
     return 0;
 }
@@ -43,7 +50,25 @@ Customer customerWithMoney(int dollars){
     customer.bottles = 0;
     customer.caps = 0;
     customer.lifetimeBottles = 0;
+    customer.fromDollars = 0;
+    customer.fromBottles = 0;
+    customer.fromCaps = 0;
     return customer;
+}
+
+Customer redeemAll(Customer customer){
+    int lifetime = customer.lifetimeBottles;
+    customer = redeemDollars(customer);
+    customer = redeemBottles(customer);
+    customer = redeemCaps(customer);
+    
+    /* if the customer can make further redemptions, 
+     repeat until there are no further possible redemptions */
+    if (lifetime != customer.lifetimeBottles){
+        return redeemAll(customer);
+    } else {
+        return customer;
+    }
 }
 
 Customer redeemDollars(Customer customer){
@@ -52,6 +77,7 @@ Customer redeemDollars(Customer customer){
     customer.bottles += bottlesAcquired;
     customer.caps += bottlesAcquired;
     customer.lifetimeBottles += bottlesAcquired;
+    customer.fromDollars += bottlesAcquired;
     return customer;
 }
 Customer redeemBottles(Customer customer){
@@ -60,6 +86,7 @@ Customer redeemBottles(Customer customer){
     customer.caps += bottlesAcquired;
     customer.bottles += bottlesAcquired;
     customer.lifetimeBottles += bottlesAcquired;
+    customer.fromBottles += bottlesAcquired;
     return customer;
 }
 Customer redeemCaps(Customer customer){
@@ -68,6 +95,7 @@ Customer redeemCaps(Customer customer){
     customer.bottles += bottlesAcquired;
     customer.caps += bottlesAcquired;
     customer.lifetimeBottles += bottlesAcquired;
+    customer.fromCaps += bottlesAcquired;
     return customer;
 }
 
