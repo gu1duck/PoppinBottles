@@ -17,6 +17,9 @@ struct Customer {
 typedef struct Customer Customer;
 
 Customer customerWithMoney(int dollars);
+Customer redeemDollars(Customer *customer);
+Customer redeemBottles(Customer *customer);
+Customer redeemCaps(Customer *customer);
 
 int main(int argc, const char * argv[]) {
     
