@@ -17,12 +17,16 @@ struct Customer {
 typedef struct Customer Customer;
 
 Customer customerWithMoney(int dollars);
-Customer redeemDollars(Customer *customer);
-Customer redeemBottles(Customer *customer);
-Customer redeemCaps(Customer *customer);
+Customer redeemDollars(Customer customer);
+Customer redeemBottles(Customer customer);
+Customer redeemCaps(Customer customer);
 
 int main(int argc, const char * argv[]) {
     
+    Customer bob = customerWithMoney(20);
+    printf("Bob has $%d, %d bottles and %d caps", bob.dollars, bob.bottles, bob.caps);
+    bob = redeemDollars(bob);
+    printf("Bob has $%d, %d bottles and %d caps", bob.dollars, bob.bottles, bob.caps);
 
     
     
@@ -36,4 +40,14 @@ Customer customerWithMoney(int dollars){
     customer.caps = 0;
     return customer;
 }
+
+Customer redeemDollars(Customer customer){
+    int bottlesAcquired = customer.dollars/2;
+    customer.bottles += bottlesAcquired;
+    customer.caps += bottlesAcquired;
+    customer.dollars = customer.dollars%2;
+    return customer;
+}
+//Customer redeemBottles(Customer *customer){}
+//Customer redeemCaps(Customer *customer){}
 
