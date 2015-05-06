@@ -24,9 +24,11 @@ Customer redeemCaps(Customer customer);
 int main(int argc, const char * argv[]) {
     
     Customer bob = customerWithMoney(20);
-    printf("Bob has $%d, %d bottles and %d caps", bob.dollars, bob.bottles, bob.caps);
+    printf("Bob has $%d, %d bottles and %d caps\n", bob.dollars, bob.bottles, bob.caps);
     bob = redeemDollars(bob);
-    printf("Bob has $%d, %d bottles and %d caps", bob.dollars, bob.bottles, bob.caps);
+    printf("Bob has $%d, %d bottles and %d caps\n", bob.dollars, bob.bottles, bob.caps);
+    bob = redeemBottles(bob);
+    printf("Bob has $%d, %d bottles and %d caps\n", bob.dollars, bob.bottles, bob.caps);
 
     
     
@@ -48,6 +50,12 @@ Customer redeemDollars(Customer customer){
     customer.dollars = customer.dollars%2;
     return customer;
 }
-//Customer redeemBottles(Customer *customer){}
+Customer redeemBottles(Customer customer){
+    int bottlesAcquired = customer.bottles/2;
+    customer.bottles += bottlesAcquired;
+    customer.caps += bottlesAcquired;
+    customer.bottles = customer.dollars%2;
+    return customer;
+}
 //Customer redeemCaps(Customer *customer){}
 
