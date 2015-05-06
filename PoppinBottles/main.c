@@ -28,18 +28,9 @@ Customer redeemAll(Customer customer);
 
 int main(int argc, const char * argv[]) {
     
-    Customer bob = customerWithMoney(20);
-    printf("Bob has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", bob.dollars, bob.bottles, bob.caps, bob.lifetimeBottles);
-    bob = redeemDollars(bob);
-    printf("Bob has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", bob.dollars, bob.bottles, bob.caps, bob.lifetimeBottles);
-    bob = redeemBottles(bob);
-    printf("Bob has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", bob.dollars, bob.bottles, bob.caps, bob.lifetimeBottles);
-    bob = redeemCaps(bob);
-    printf("Bob has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", bob.dollars, bob.bottles, bob.caps, bob.lifetimeBottles);
-    
     Customer phil = customerWithMoney(20);
     phil = redeemAll(phil);
-    printf("Phil has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\n", phil.dollars, phil.bottles, phil.caps, phil.lifetimeBottles);
+    printf("Phil has $%d, %d bottles and %d caps. He's gotten %d bottles, total.\nHe purchased %d, got %d by redeeming bottles and %d from redeeming caps.", phil.dollars, phil.bottles, phil.caps, phil.lifetimeBottles, phil.fromDollars, phil.fromBottles, phil.fromCaps);
     
     return 0;
 }
