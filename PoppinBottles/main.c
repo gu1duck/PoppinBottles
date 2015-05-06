@@ -16,10 +16,21 @@ struct Customer {
 
 typedef struct Customer Customer;
 
+Customer customerWithMoney(int dollars);
+
 int main(int argc, const char * argv[]) {
     
-    
+
     
     
     return 0;
 }
+
+Customer customerWithMoney(int dollars){
+    Customer customer;
+    customer.dollars = dollars;
+    customer.bottles = 0;
+    customer.caps = 0;
+    return customer;
+}
+
